@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const Header = ({ personal }) => {
   return (
-    <header className="relative flex flex-col md:flex-row items-center md:items-start gap-8 mb-12 p-8 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 shadow-2xl">
+    <header className="relative flex flex-col md:flex-row items-start gap-8 mb-12 px-4 py-8 sm:px-6 lg:px-8 w-full">
       {/* Profile Image with Glow Effect */}
       <motion.div
         initial={{ scale: 0, opacity: 0 }}
@@ -20,7 +20,7 @@ const Header = ({ personal }) => {
       </motion.div>
 
       {/* Text Content */}
-      <div className="flex-1 text-center md:text-left space-y-3">
+      <div className="flex-1 text-left space-y-3">
         <motion.h1
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -44,7 +44,7 @@ const Header = ({ personal }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="flex flex-wrap justify-center md:justify-start gap-4 mt-4 text-slate-300 text-sm"
+          className="flex flex-wrap justify-start gap-4 mt-4 text-slate-300 text-sm"
         >
           <ContactItem
             href={`mailto:${personal.email}`}
