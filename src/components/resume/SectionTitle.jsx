@@ -12,7 +12,7 @@ const SectionTitle = ({ title }) => {
       <h2 className="text-3xl font-bold text-white tracking-tight">
         {title}
       </h2>
-      <div className="h-[1px] flex-grow bg-gradient-to-r from-blue-500/50 to-transparent" />
+      <div className="h-px grow bg-linear-to-r from-blue-500/50 to-transparent" />
     </motion.div>
   );
 };

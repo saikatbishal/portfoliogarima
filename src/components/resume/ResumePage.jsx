@@ -19,7 +19,7 @@ export default function ResumePage() {
   } = resumeData;
 
   return (
-    <div className="min-h-screen w-full bg-slate-950 text-slate-200 selection:bg-blue-500/30 selection:text-blue-200">
+    <div className="min-h-screen pb-10 w-full bg-slate-950 text-slate-200 selection:bg-blue-500/30 selection:text-blue-200">
       {/* Background Gradients - purely decorative */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-900/20 rounded-full blur-3xl" />
@@ -29,9 +29,9 @@ export default function ResumePage() {
       <main className="relative z-10 w-full">
         <Header personal={personal} />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 px-4 sm:px-6 lg:px-8">
           {/* Left Column (Main Content) */}
-          <div className="lg:col-span-8 space-y-12">
+          <div className="lg:col-span-8 space-y-16">
             {/* Summary */}
             <section>
               <SectionTitle title="Professional Summary" />
@@ -45,7 +45,7 @@ export default function ResumePage() {
             {/* Experience */}
             <section>
               <SectionTitle title="Experience" />
-              <div className="space-y-4">
+              <div className="space-y-8">
                 {experience.map((job, idx) => (
                   <ExperienceCard key={idx} job={job} index={idx} />
                 ))}
@@ -65,11 +65,11 @@ export default function ResumePage() {
           </div>
 
           {/* Right Column (Sidebar style) */}
-          <div className="lg:col-span-4 space-y-12">
+          <div className="lg:col-span-4 space-y-16">
             {/* Skills */}
             <section>
               <SectionTitle title="Tech Stack" />
-              <div className="space-y-6">
+              <div className="space-y-10">
                 {/* IDE Tools */}
                 <div>
                   <h4 className="text-lg font-semibold text-slate-300 mb-3 text-left">

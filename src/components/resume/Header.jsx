@@ -1,7 +1,19 @@
 import React from "react";
 import { motion } from "framer-motion";
-
+import LinkedIn from "../../assets/LinkedIn";
+import Gmail from "../../assets/Gmail";
+import Phone from "../../assets/Phone";
 const Header = ({ personal }) => {
+  const handlePhoneClick = async () => {
+    try {
+      await navigator.clipboard.writeText(personal.phone);
+      // Optional: You could add a toast notification here
+      console.log("Phone number copied to clipboard!");
+    } catch (err) {
+      console.error("Failed to copy phone number: ", err);
+    }
+  };
+
   return (
     <header className="relative flex flex-col md:flex-row items-start gap-8 mb-12 px-4 py-8 sm:px-6 lg:px-8 w-full">
       {/* Profile Image with Glow Effect */}
@@ -44,18 +56,26 @@ const Header = ({ personal }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="flex flex-wrap justify-start gap-4 mt-4 text-slate-300 text-sm"
+          className="flex flex-wrap justify-start items-center gap-4 mt-4 text-slate-300 text-sm"
         >
-          <ContactItem
+          {/* <ContactItem
             href={`mailto:${personal.email}`}
             label={personal.email}
-          />
-          <span className="hidden md:block text-slate-600">•</span>
-          <span className="cursor-default hover:text-blue-300 transition-colors">
-            {personal.phone}
+          /> */}
+          <a href={`mailto:${personal.email}`} label={personal.email}>
+            <Gmail />
+          </a>
+          <a href={personal.linkedin} target="_blank">
+            <LinkedIn />
+          </a>
+
+          <span
+            className="cursor-pointer hover:text-blue-300 transition-colors flex items-center gap-2"
+            onClick={handlePhoneClick}
+            title="Click to copy phone number"
+          >
+            <Phone />
           </span>
-          <span className="hidden md:block text-slate-600">•</span>
-          <ContactItem href={personal.linkedin} label="LinkedIn" />
         </motion.div>
       </div>
     </header>
