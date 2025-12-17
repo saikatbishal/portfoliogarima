@@ -18,6 +18,25 @@ export default function ResumePage() {
     achievements,
   } = resumeData;
 
+  // Robust collector: accepts strings, arrays, or nested objects and returns flat unique labels
+  const collectSkills = (entry) => {
+    if (entry === null || entry === undefined) return []
+    if (typeof entry === 'string' || typeof entry === 'number') return [String(entry)]
+    if (Array.isArray(entry)) return entry.flatMap((e) => collectSkills(e))
+    if (typeof entry === 'object') {
+      const out = []
+      // if object is a simple map of labels (e.g., {tools: [...], skills: [...]}) traverse values
+      Object.values(entry).forEach((val) => {
+        out.push(...collectSkills(val))
+      })
+      // also try to include a name/title if present
+      if (typeof entry.name === 'string') out.unshift(entry.name)
+      // dedupe while preserving order
+      return [...new Set(out.filter(Boolean))]
+    }
+    return []
+  }
+
   return (
     <div className="min-h-screen pb-10 w-full bg-slate-950 text-slate-200 selection:bg-blue-500/30 selection:text-blue-200">
       {/* Background Gradients - purely decorative */}
@@ -76,12 +95,8 @@ export default function ResumePage() {
                     IDEs
                   </h4>
                   <div className="flex flex-wrap gap-2">
-                    {softwareSkills.ideTools.map((skill, idx) => (
-                      <SkillBadge
-                        key={`ide-${idx}`}
-                        skill={skill}
-                        index={idx}
-                      />
+                    {collectSkills(softwareSkills.ideTools ?? softwareSkills.IDEs ?? softwareSkills.ide).map((skill, idx) => (
+                      <SkillBadge key={`ide-${idx}`} skill={skill} index={idx} />
                     ))}
                   </div>
                 </div>
@@ -92,12 +107,8 @@ export default function ResumePage() {
                     Programming Languages
                   </h4>
                   <div className="flex flex-wrap gap-2">
-                    {softwareSkills.programmingLanguages.map((skill, idx) => (
-                      <SkillBadge
-                        key={`prog-${idx}`}
-                        skill={skill}
-                        index={idx}
-                      />
+                    {collectSkills(softwareSkills.programmingLanguages ?? softwareSkills.languages ?? softwareSkills.programming).map((skill, idx) => (
+                      <SkillBadge key={`prog-${idx}`} skill={skill} index={idx} />
                     ))}
                   </div>
                 </div>
@@ -108,12 +119,8 @@ export default function ResumePage() {
                     API Testing Tools
                   </h4>
                   <div className="flex flex-wrap gap-2">
-                    {softwareSkills.apiTools.map((skill, idx) => (
-                      <SkillBadge
-                        key={`api-${idx}`}
-                        skill={skill}
-                        index={idx}
-                      />
+                    {collectSkills(softwareSkills.apiTools ?? softwareSkills.apiTesting ?? softwareSkills.apiTesting?.tools ?? softwareSkills.api).map((skill, idx) => (
+                      <SkillBadge key={`api-${idx}`} skill={skill} index={idx} />
                     ))}
                   </div>
                 </div>
@@ -124,12 +131,8 @@ export default function ResumePage() {
                     Automation Testing
                   </h4>
                   <div className="flex flex-wrap gap-2">
-                    {softwareSkills.automationTesting.map((skill, idx) => (
-                      <SkillBadge
-                        key={`auto-${idx}`}
-                        skill={skill}
-                        index={idx}
-                      />
+                    {collectSkills(softwareSkills.automationTesting ?? softwareSkills.automationTesting?.toolsAndFrameworks ?? softwareSkills.automation ?? softwareSkills.automationTesting?.tools).map((skill, idx) => (
+                      <SkillBadge key={`auto-${idx}`} skill={skill} index={idx} />
                     ))}
                   </div>
                 </div>
@@ -140,12 +143,8 @@ export default function ResumePage() {
                     Defect Tracking
                   </h4>
                   <div className="flex flex-wrap gap-2">
-                    {softwareSkills.defectTracking.map((skill, idx) => (
-                      <SkillBadge
-                        key={`defect-${idx}`}
-                        skill={skill}
-                        index={idx}
-                      />
+                    {collectSkills(softwareSkills.defectTracking ?? softwareSkills.defectAndQualityManagement ?? softwareSkills.defects).map((skill, idx) => (
+                      <SkillBadge key={`defect-${idx}`} skill={skill} index={idx} />
                     ))}
                   </div>
                 </div>
@@ -156,12 +155,8 @@ export default function ResumePage() {
                     Performance Testing
                   </h4>
                   <div className="flex flex-wrap gap-2">
-                    {softwareSkills.jmeter.map((skill, idx) => (
-                      <SkillBadge
-                        key={`perf-${idx}`}
-                        skill={`JMeter (${skill})`}
-                        index={idx}
-                      />
+                    {collectSkills(softwareSkills.jmeter ?? softwareSkills.performanceTesting ?? softwareSkills.performanceTesting?.tools ?? softwareSkills.performance).map((skill, idx) => (
+                      <SkillBadge key={`perf-${idx}`} skill={`JMeter (${skill})`} index={idx} />
                     ))}
                   </div>
                 </div>

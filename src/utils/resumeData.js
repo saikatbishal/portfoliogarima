@@ -9,13 +9,67 @@ const resume = {
   },
   professionalSummary:
     `Results-driven Test Engineer with 4+ years of experience in manual software quality assurance for web and mobile applications, particularly in EdTech and GIS domains. Proficient in testing integrations involving GIS, MapBox, Couchbase, PostgreSQL, and RESTful APIs using Postman. Skilled in developing and executing comprehensive test cases, managing requirements traceability matrices, and performing various test types including Functional, Integration, Regression, Smoke, System, Ad-hoc, and User Acceptance Testing (UAT). Experienced in test documentation, defect lifecycle management, and applying SDLC and STLC best practices to ensure high-quality software delivery in line with industry standards.`,
-  softwareSkills: {
-    defectTracking: ['Jira'],
-    apiTools: ['Postman', 'Swagger'],
-    programmingLanguages: ['Java'],
-    automationTesting: ['Selenium WebDriver', 'WebDriver IO', 'TestNG', 'Json'],
-    ideTools: ['Eclipse', 'IntelliJ'],
-    jmeter: ['Beginner'],
+  softwareSkills : {
+  ideTools: [
+    "Eclipse",
+    "IntelliJ IDEA"
+  ],
+
+  programmingLanguages: [
+    "Java"
+  ],
+
+  apiTools: [
+    "Postman",
+    "Swagger"
+  ],
+
+  apiTestingSkills: [
+    "RESTful API Testing",
+    "API Request Validation",
+    "API Response Validation",
+    "Status Code Verification",
+    "JSON Payload Validation"
+  ],
+
+  automationTestingTools: [
+    "Selenium WebDriver",
+    "WebDriverIO",
+    "TestNG"
+  ],
+
+  automationTestingSkills: [
+    "Automation Script Execution",
+    "Framework Understanding",
+    "Basic Debugging"
+  ],
+
+  performanceTesting: [
+    "JMeter (Beginner)"
+  ],
+
+  databaseTesting: [
+    "Couchbase Database Testing",
+    "PostgreSQL Database Testing",
+    "Data Validation",
+    "Backend Data Verification"
+  ],
+
+  applicationTesting: [
+    "Web Application Testing",
+    "Mobile Application Testing"
+  ],
+
+  testingTypes: [
+    "Functional Testing",
+    "Integration Testing",
+    "System Testing",
+    "Regression Testing",
+    "Smoke Testing",
+    "Ad-hoc Testing",
+    "User Acceptance Testing (UAT)"
+  ],
+
   },
   experience: [
     {
@@ -24,14 +78,11 @@ const resume = {
       title: 'Senior Software Tester',
       location: 'Bangalore',
       responsibilities: [
-        'Created and extended test data that accelerated feature testing and reduced overall testing time by 10%, improving the efficiency and workability of new releases.',
-        'Developed and expanded test data sets, accelerating feature testing processes and reducing total testing duration by approximately 12%, improving release efficiency and supporting faster deployment of new features.',
-        'Performed end-to-end functional and integration testing for 95% of sprint features in an Agile environment.',
-        'Participated in 100% of build verification testing cycles to ensure stable releases and maintain high quality.',
-        'Collaborated in the creation of 90% of test scenarios and designed comprehensive test cases at the start of each sprint.',
-        'Leveraged AutoCAD integrated with SpatialNetworx to develop detailed test plans covering 98% of requirements and conducted thorough regression testing.',
-        'Maintained complete traceability matrices and attended 100% of daily stand-up meetings, driving continuous process improvement and ensuring timely delivery of project milestones.',
-      ],
+        'Optimized test data creation and expansion, reducing overall testing time by ~12% and accelerating feature validation and release cycles.',
+        'Executed end-to-end functional and integration testing for 95% of sprint features within an Agile environment.',
+        'Conducted 100% build verification testing (BVT) to ensure release stability and quality assurance.',
+        'Led test scenario creation (90%) and authored comprehensive test cases at sprint initiation.',
+        'Built requirement-aligned test plans using AutoCAD and SpatialNetworx, ensured 98% coverage, managed regression testing, and maintained traceability matrices while contributing to daily stand-ups and process improvement.']
     },
     {
       company: 'Nobel Software Systems Pvt Ltd',
@@ -39,11 +90,11 @@ const resume = {
       title: 'Software Tester',
       location: 'Bangalore',
       responsibilities: [
-        'Performed thorough cross-platform compatibility testing across 95% of supported operating systems.',
-        'Conducted Smoke, Ad Hoc, and Regression Testing for 100% of new builds and major releases to assess application stability and readiness for deployment.',
-        'Maintained and updated the Requirements Traceability Matrix, ensuring 98% end-to-end test coverage and compliance with project requirements.',
-        'Actively collaborated in 100% of daily Agile stand-up meetings to facilitate team communication, resolve blockers, and ensure timely delivery of high-quality software releases.',
-      ],
+        "Executed cross-platform compatibility testing across 95% of supported operating systems",
+  "Performed Smoke, Ad Hoc, and Regression Testing for 100% of new builds and major releases, ensuring application stability and deployment readiness",
+  "Maintained and updated the Requirements Traceability Matrix (RTM), achieving 98% end-to-end test coverage and requirements compliance",
+  "Actively participated in 100% Agile daily stand-ups, enabling blocker resolution, team alignment, and on-time delivery of high-quality releases"
+ ],
     },
     {
       company: 'Eklabya Management Institute, WB',
@@ -51,10 +102,10 @@ const resume = {
       title: 'Software Tester',
       location: 'Siliguri, W.B.',
       responsibilities: [
-        'Analysed 100% of requirements, performed system analysis, and developed test cases to ensure comprehensive coverage of all business needs.',
-        'Engaged in 95% of client meetings to clarify requirements and align testing objectives with stakeholder expectations.',
-        'Developed and maintained requirements traceability matrices, achieving 98% alignment between requirements and test coverage.',
-      ],
+        "Analyzed 100% of requirements, performed system analysis, and authored test cases to ensure complete business coverage",
+  "Participated in 95% of client meetings to clarify requirements and align testing objectives with stakeholder expectations",
+  "Developed and maintained Requirements Traceability Matrices (RTM), achieving 98% requirements-to-test coverage alignment"
+],
     },
     {
       company: 'IIAS School of Management',
@@ -62,10 +113,10 @@ const resume = {
       title: 'Software Tester',
       location: 'Siliguri, W.B.',
       responsibilities: [
-        'Collaborated closely with business analysts and developers in 95% of sprint cycles to refine requirements and ensuring 100% test coverage through accurate test case and data creation.',
-        'Executed 98% test cases and performed User Acceptance Testing (UAT) support, ad-hoc, system and regression testing to ensure application quality.',
-        'Participated in 100% retrospect meetings, internal knowledge transfer sessions; maintained comprehensive query log documentation for issue tracking and resolution.',
-      ],
+        "Collaborated with business analysts and developers in 95% of sprint cycles to refine requirements and ensure 100% test coverage through accurate test case and test data creation",
+  "Executed 98% of test cases and supported UAT, ad-hoc, system, and regression testing to ensure application quality",
+  "Participated in 100% retrospectives and knowledge transfer sessions, maintaining query logs for effective issue tracking and resolution"
+ ],
     },
   ],
   qualifications: ['MA (Master of Arts) from Annamalai University, Tamil Nadu (2014-2016)'],
