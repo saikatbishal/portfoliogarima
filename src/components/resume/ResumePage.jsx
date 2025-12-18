@@ -1,5 +1,4 @@
 import React from "react";
-import { motion } from "framer-motion";
 import resumeData from "../../utils/resumeData"; // Adjust path based on your project
 import Header from "./Header";
 import SectionTitle from "./SectionTitle";
@@ -7,6 +6,7 @@ import ExperienceCard from "./ExperienceCard";
 import SkillBadge from "./SkillBadge";
 import ListBlock from "./ListBlock";
 import AnimatedWrapper from "./AnimatedWrapper";
+import ContactSection from "./ContactSection";
 
 export default function ResumePage() {
   const {
@@ -20,22 +20,90 @@ export default function ResumePage() {
 
   // Robust collector: accepts strings, arrays, or nested objects and returns flat unique labels
   const collectSkills = (entry) => {
-    if (entry === null || entry === undefined) return []
-    if (typeof entry === 'string' || typeof entry === 'number') return [String(entry)]
-    if (Array.isArray(entry)) return entry.flatMap((e) => collectSkills(e))
-    if (typeof entry === 'object') {
-      const out = []
+    if (entry === null || entry === undefined) return [];
+    if (typeof entry === "string" || typeof entry === "number")
+      return [String(entry)];
+    if (Array.isArray(entry)) return entry.flatMap((e) => collectSkills(e));
+    if (typeof entry === "object") {
+      const out = [];
       // if object is a simple map of labels (e.g., {tools: [...], skills: [...]}) traverse values
       Object.values(entry).forEach((val) => {
-        out.push(...collectSkills(val))
-      })
+        out.push(...collectSkills(val));
+      });
       // also try to include a name/title if present
-      if (typeof entry.name === 'string') out.unshift(entry.name)
+      if (typeof entry.name === "string") out.unshift(entry.name);
       // dedupe while preserving order
-      return [...new Set(out.filter(Boolean))]
+      return [...new Set(out.filter(Boolean))];
     }
-    return []
-  }
+    return [];
+  };
+
+  // Define skill sections with multiple fallback keys to handle various data structures
+  const skillSections = [
+    {
+      title: "IDEs",
+      keys: ["ideTools", "IDEs", "ide"],
+    },
+    {
+      title: "Programming Languages",
+      keys: ["programmingLanguages", "languages", "programming"],
+    },
+    {
+      title: "API Testing Tools",
+      keys: ["apiTools", "apiTesting", "api"],
+    },
+    {
+      title: "API Testing Skills",
+      keys: ["apiTestingSkills", "apiSkills"],
+    },
+    {
+      title: "Automation Testing Tools",
+      keys: ["automationTestingTools", "automationTools", "automation"],
+    },
+    {
+      title: "Automation Testing Skills",
+      keys: ["automationTestingSkills", "automationSkills"],
+    },
+    {
+      title: "Performance Testing",
+      keys: ["performanceTesting", "performance", "jmeter"],
+    },
+    {
+      title: "Database Testing",
+      keys: ["databaseTesting", "database", "db"],
+    },
+    {
+      title: "Application Testing",
+      keys: ["applicationTesting", "application"],
+    },
+    {
+      title: "Testing Types",
+      keys: ["testingTypes", "testTypes", "testing"],
+    },
+    {
+      title: "Defect Tracking",
+      keys: [
+        "defectTracking",
+        "defectAndQualityManagement",
+        "defects",
+        "defectManagement",
+      ],
+    },
+  ];
+
+  // Helper to get skills for a section by trying multiple keys
+  const getSkillsForSection = (section) => {
+    for (const key of section.keys) {
+      const data = softwareSkills[key];
+      if (data !== null && data !== undefined) {
+        const skills = collectSkills(data);
+        if (skills.length > 0) {
+          return skills;
+        }
+      }
+    }
+    return [];
+  };
 
   return (
     <div className="min-h-screen pb-10 w-full bg-slate-950 text-slate-200 selection:bg-blue-500/30 selection:text-blue-200">
@@ -89,77 +157,29 @@ export default function ResumePage() {
             <section>
               <SectionTitle title="Tech Stack" />
               <div className="space-y-10">
-                {/* IDE Tools */}
-                <div>
-                  <h4 className="text-lg font-semibold text-slate-300 mb-3 text-left">
-                    IDEs
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {collectSkills(softwareSkills.ideTools ?? softwareSkills.IDEs ?? softwareSkills.ide).map((skill, idx) => (
-                      <SkillBadge key={`ide-${idx}`} skill={skill} index={idx} />
-                    ))}
-                  </div>
-                </div>
+                {skillSections.map((section, sectionIdx) => {
+                  const skills = getSkillsForSection(section);
 
-                {/* Programming Languages */}
-                <div>
-                  <h4 className="text-lg font-semibold text-slate-300 mb-3 text-left">
-                    Programming Languages
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {collectSkills(softwareSkills.programmingLanguages ?? softwareSkills.languages ?? softwareSkills.programming).map((skill, idx) => (
-                      <SkillBadge key={`prog-${idx}`} skill={skill} index={idx} />
-                    ))}
-                  </div>
-                </div>
+                  // Only render sections that have skills
+                  if (skills.length === 0) return null;
 
-                {/* API Testing Tools */}
-                <div>
-                  <h4 className="text-lg font-semibold text-slate-300 mb-3 text-left">
-                    API Testing Tools
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {collectSkills(softwareSkills.apiTools ?? softwareSkills.apiTesting ?? softwareSkills.apiTesting?.tools ?? softwareSkills.api).map((skill, idx) => (
-                      <SkillBadge key={`api-${idx}`} skill={skill} index={idx} />
-                    ))}
-                  </div>
-                </div>
-
-                {/* Automation Testing */}
-                <div>
-                  <h4 className="text-lg font-semibold text-slate-300 mb-3 text-left">
-                    Automation Testing
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {collectSkills(softwareSkills.automationTesting ?? softwareSkills.automationTesting?.toolsAndFrameworks ?? softwareSkills.automation ?? softwareSkills.automationTesting?.tools).map((skill, idx) => (
-                      <SkillBadge key={`auto-${idx}`} skill={skill} index={idx} />
-                    ))}
-                  </div>
-                </div>
-
-                {/* Defect Tracking */}
-                <div>
-                  <h4 className="text-lg font-semibold text-slate-300 mb-3 text-left">
-                    Defect Tracking
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {collectSkills(softwareSkills.defectTracking ?? softwareSkills.defectAndQualityManagement ?? softwareSkills.defects).map((skill, idx) => (
-                      <SkillBadge key={`defect-${idx}`} skill={skill} index={idx} />
-                    ))}
-                  </div>
-                </div>
-
-                {/* Performance Testing */}
-                <div>
-                  <h4 className="text-lg font-semibold text-slate-300 mb-3 text-left">
-                    Performance Testing
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {collectSkills(softwareSkills.jmeter ?? softwareSkills.performanceTesting ?? softwareSkills.performanceTesting?.tools ?? softwareSkills.performance).map((skill, idx) => (
-                      <SkillBadge key={`perf-${idx}`} skill={`JMeter (${skill})`} index={idx} />
-                    ))}
-                  </div>
-                </div>
+                  return (
+                    <div key={`section-${sectionIdx}`}>
+                      <h4 className="text-lg font-semibold text-slate-300 mb-3 text-left">
+                        {section.title}
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        {skills.map((skill, idx) => (
+                          <SkillBadge
+                            key={`${section.keys[0]}-${idx}`}
+                            skill={skill}
+                            index={idx}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </section>
 
@@ -175,6 +195,12 @@ export default function ResumePage() {
               <ListBlock items={achievements} />
             </section>
           </div>
+        </div>
+
+        {/* Contact Section */}
+        <div className="px-4 sm:px-6 lg:px-8 mt-16">
+          <SectionTitle title="Contact Me" />
+          <ContactSection personal={personal} />
         </div>
 
         {/* Footer */}
